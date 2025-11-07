@@ -9,15 +9,11 @@
 #include <string>
 #include <string_view>
 
-namespace kotools::codec {
-
-namespace base64 {
+namespace kotools::codec::base64 {
 
 std::string encode(const std::string_view& input);
 std::string decode(const std::string_view& input);
 
-}  // namespace base64
-
-}  // namespace kotools::codec
+}  // namespace kotools::codec::base64
 
 #endif  // !KOTOOLS_CODEC_BASE64_H
