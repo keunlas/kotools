@@ -6,3 +6,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # C++ Compile Options (Global)
 add_compile_options(-Wall)
 add_compile_options(-Werror)
+
+# Message for debug
+message(STATUS "CMAKE_CXX_STANDARD = ${CMAKE_CXX_STANDARD}")
+message(STATUS "CMAKE_CXX_STANDARD_REQUIRED = ${CMAKE_CXX_STANDARD_REQUIRED}")
+message(STATUS "CMAKE_CXX_EXTENSIONS = ${CMAKE_CXX_EXTENSIONS}")

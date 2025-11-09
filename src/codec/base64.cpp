@@ -102,32 +102,39 @@ std::string decode(const std::string_view& input) {
     result.push_back(char3);
   }
 
-  auto paddings = input.size() - input.find_first_of(BASE64_PADDING);
-  if (paddings == 1) {
-    if (!is_valid_char(*iter) || !is_valid_char(*(iter + 1)) ||
-        !is_valid_char(*(iter + 2))) {
-      throw std::logic_error("invalid base64 character");
-      return "";
-    }
+  if (iter == input.end()) {
+    return result;
+  }
 
+  size_t paddings = 0;
+  auto pad_pos = input.find(get_padding());
+  if (pad_pos != std::string_view::npos) {
+    paddings = input.size() - pad_pos;
+  }
+
+  size_t remains = 0;
+  if (paddings == 0) {
+    remains = input.end() - iter;
+  } else {
+    remains = 4 - paddings;
+  }
+
+  if (remains > 1) {
     auto char1 = ((get_index(*iter) & 0x3f) << 2) |
                  ((get_index(*(iter + 1)) & 0x30) >> 4);
+    result.push_back(char1);
+  }
+
+  if (remains > 2) {
     auto char2 = ((get_index(*(iter + 1)) & 0x0f) << 4) |
                  ((get_index(*(iter + 2)) & 0x3c) >> 2);
-    result.push_back(char1);
     result.push_back(char2);
-  } else if (paddings == 2) {
-    if (!is_valid_char(*iter) || !is_valid_char(*(iter + 1))) {
-      throw std::logic_error("invalid base64 character");
-      return "";
-    }
+  }
 
-    auto char1 = ((get_index(*iter) & 0x3f) << 2) |
-                 ((get_index(*(iter + 1)) & 0x30) >> 4);
-    result.push_back(char1);
-  } else {
-    throw std::logic_error("invalid base64 string");
-    return "";
+  if (remains > 3) {
+    auto char3 = ((get_index(*(iter + 2)) & 0x03) << 6) |
+                 (get_index(*(iter + 3)) & 0x3f);
+    result.push_back(char3);
   }
 
   return result;
