@@ -58,6 +58,10 @@ void TaskQueue::push(TaskPtr task) {
       tail_.compare_exchange_strong(current_tail, new_node,
                                     std::memory_order_release,
                                     std::memory_order_relaxed);
+
+      // Update size_
+      size_.fetch_add(1, std::memory_order_relaxed);
+
       return;
     }
   }
@@ -100,10 +104,14 @@ TaskPtr TaskQueue::pop() {
        *
        * Because the node currently popped out becomes the new dummy,
        * the memory of the new dummy can be freed here for saving memory.
+       * But my instinct tells me that this is thread-unsafe.
        *
        * // curr_head->task_.reset();
        *
        */
+
+      // Update size_
+      size_.fetch_sub(1, std::memory_order_relaxed);
 
       return curr_task;
     }
