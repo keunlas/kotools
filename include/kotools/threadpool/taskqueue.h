@@ -29,7 +29,7 @@ class TaskQueue {
   ~TaskQueue();
 
   void push(TaskPtr task);
-  TaskPtr pop();
+  TaskPtr pop();  // If queue empty then pop a nullptr
 
  private:
   struct TaskNode;
