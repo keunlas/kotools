@@ -5,6 +5,8 @@
 
 #include "kotools/threadpool/taskqueue.h"
 
+#include "kotools/threadpool/task.h"
+
 namespace kotools::threadpool {
 
 struct TaskQueue::TaskNode {

@@ -4,6 +4,8 @@
 #include <thread>
 #include <vector>
 
+#include "kotools/threadpool/task.h"
+
 using namespace kotools::threadpool;
 
 TaskQueue queue;

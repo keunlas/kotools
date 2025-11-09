@@ -9,8 +9,6 @@
 #include <atomic>
 #include <memory>
 
-#include "kotools/threadpool/task.h"
-
 namespace kotools::threadpool {
 
 /**
@@ -23,8 +21,11 @@ namespace kotools::threadpool {
  *
  */
 
+class Task;
+
 class TaskQueue {
  public:
+  using TaskPtr = std::shared_ptr<Task>;
   using SizeType = std::size_t;
 
  public:
