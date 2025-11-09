@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.16)
 project(KoTools VERSION 0.0.1)
 
 include(cmake/build_option.cmake)
-include(cmake/ctest.cmake)
 include(cmake/cxx.cmake)
 include(cmake/output.cmake)
+include(cmake/ctest.cmake)
 
 include_directories(BEFORE "include" "deps/include")
 
