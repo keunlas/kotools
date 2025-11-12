@@ -8,6 +8,10 @@
 
 #include <atomic>
 #include <memory>
+#include <mutex>
+#include <queue>
+
+#include "kotools/threadpool/task.h"
 
 namespace kotools::threadpool {
 
@@ -16,35 +20,36 @@ namespace kotools::threadpool {
  *
  * Here are three features to expand
  *  1. batch
- *  2. bounded
- *  3. priority
+ *  2. priority
  *
  */
-
-class Task;
 
 class TaskQueue {
  public:
   using TaskPtr = std::shared_ptr<Task>;
-  using SizeType = std::size_t;
 
  public:
-  TaskQueue();
+  TaskQueue();                      // unbounded queue
+  TaskQueue(std::size_t capacity);  // bounded queue
   ~TaskQueue();
 
-  void push(TaskPtr task);
-  TaskPtr pop();  // If queue empty then pop a nullptr
+  // Return true if push successfully
+  bool push(TaskPtr task);
 
-  // In highly concurrent environments,
-  // the value returned by size() may not be precise,
-  // but this is a common feature of lock-free queues.
-  inline SizeType size() { return size_.load(); }
+  // Return nullptr if queue empty
+  TaskPtr pop();
+
+  std::size_t size();
+
+  bool empty();
+
+  bool full();
 
  private:
-  struct TaskNode;
-  std::atomic<TaskNode*> head_;  // dummy
-  std::atomic<TaskNode*> tail_;
-  std::atomic_size_t size_{0};
+  std::mutex queue_mtx_{};
+  std::queue<TaskPtr> queue_{};
+  std::size_t capacity_;
+  bool is_bounded_;
 };
 
 }  // namespace kotools::threadpool

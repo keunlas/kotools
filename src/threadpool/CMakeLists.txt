@@ -2,6 +2,7 @@ add_library(threadpool_interface INTERFACE)
 
 target_sources(threadpool_interface INTERFACE
   taskqueue.cpp
+  threadpool.cpp
 )
 
 if(${KOTOOLS_BUILD_DIVIDEDLY})

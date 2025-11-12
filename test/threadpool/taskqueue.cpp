@@ -50,8 +50,8 @@ void test(int n_producers, int n_produce, int n_comsumers, int n_comsume) {
 }
 
 int main() {
-  test(4, 10, 2, 20);  // produce equal comsume
-  test(4, 10, 2, 15);  // more produce
-  test(4, 10, 2, 30);  // more comsume
+  test(4, 1000, 2, 2000);  // produce equal comsume
+  test(4, 1000, 2, 1500);  // more produce
+  test(4, 1000, 2, 3000);  // more comsume
   return 0;
 }
