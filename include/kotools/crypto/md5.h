@@ -6,13 +6,15 @@
 #ifndef KOTOOLS_CRYPTO_MD5_H
 #define KOTOOLS_CRYPTO_MD5_H
 
+#include <cstdint>
 #include <string_view>
 #include <vector>
 
-namespace kotools::codec::md5 {
+namespace kotools::crypto::md5 {
 
-std::vector<char> crypt(const std::string_view& input);
+std::string to_string(std::vector<uint8_t> raw_md5);
+std::vector<uint8_t> crypt(std::string_view input);
 
-}  // namespace kotools::codec::md5
+}  // namespace kotools::crypto::md5
 
 #endif  // !KOTOOLS_CRYPTO_MD5_H
