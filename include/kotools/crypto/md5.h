@@ -10,10 +10,12 @@
 #include <string_view>
 #include <vector>
 
+// [TODO] Fix bug of md5's lib
+
 namespace kotools::crypto::md5 {
 
-std::string to_string(std::vector<uint8_t> raw_md5);
-std::vector<uint8_t> crypt(std::string_view input);
+// std::string to_string(std::vector<uint8_t> raw_md5);
+// std::vector<uint8_t> crypt(std::string_view input);
 
 }  // namespace kotools::crypto::md5
 
