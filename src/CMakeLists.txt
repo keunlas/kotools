@@ -1,5 +1,4 @@
 add_subdirectory(codec)
-add_subdirectory(crypto)
 add_subdirectory(threadpool)
 
 if(${KOTOOLS_BUILD_SHARED})
@@ -13,6 +12,5 @@ add_library(kotools ${KOTOOLS_LIB_BUILD_FLAG})
 
 target_link_libraries(kotools PRIVATE
   codec_interface
-  crypto_interface
   threadpool_interface
 )
