@@ -23,9 +23,8 @@ int main() {
   pool.start();
 
   std::thread t{[&pool]() {
-    // for (int i = 0; i < 10000; ++i) {
-    for (int i = 0; true; ++i) {
-      // std::this_thread::sleep_for(std::chrono::microseconds(100));
+    for (int i = 0; i < 10000; ++i) {
+      std::this_thread::sleep_for(std::chrono::microseconds(1));
       pool.add_task(std::make_shared<IntTask>(i));
     }
   }};
