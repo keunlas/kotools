@@ -39,12 +39,6 @@ class TaskQueue {
   // Return nullptr if queue empty
   TaskPtr pop();
 
-  std::size_t size();
-
-  bool empty();
-
-  bool full();
-
  private:
   std::mutex queue_mtx_{};
   std::queue<TaskPtr> queue_{};

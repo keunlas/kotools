@@ -19,13 +19,13 @@ class IntTask : public Task {
 };
 
 int main() {
-  ThreadPool pool(2);
+  ThreadPool pool(8192, 2);
   pool.start();
 
   std::thread t{[&pool]() {
     // for (int i = 0; i < 10000; ++i) {
     for (int i = 0; true; ++i) {
-      std::this_thread::sleep_for(std::chrono::microseconds(100));
+      // std::this_thread::sleep_for(std::chrono::microseconds(100));
       pool.add_task(std::make_shared<IntTask>(i));
     }
   }};

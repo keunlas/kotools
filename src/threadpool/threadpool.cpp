@@ -17,6 +17,9 @@ ThreadPool::ThreadPool(std::size_t n_queuesize, std::size_t n_threads)
     : queue_(n_queuesize), n_threads_(n_threads) {}
 
 ThreadPool::~ThreadPool() {
+  if (exit_.load() == false) {
+    quit();
+  }
   for (auto&& t : threads_) {
     if (t.joinable()) {
       t.join();
@@ -45,12 +48,11 @@ void ThreadPool::add_task(TaskPtr task) {
   if (exit_.load() == true) {
     return;
   }
-
   while (queue_.push(task) == false) {
+    std::this_thread::yield();
     if (exit_.load() == true) {
       return;
     }
-    std::this_thread::yield();
   }
 }
 
