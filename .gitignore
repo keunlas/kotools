@@ -1,8 +1,8 @@
 *
 !*/
 
-/build/
-/release/
+.vscode/
+build/
 
 !.gitignore
 !.gitkeep
@@ -17,4 +17,3 @@
 !/include/**/*.h
 !/src/**/*.cpp
 !/test/**/*
-
