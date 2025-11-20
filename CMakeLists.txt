@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(KoTools VERSION 0.0.1)
+project(KoTools VERSION 0.0.1 LANGUAGES C CXX)
 
 include(cmake/build_option.cmake)
 include(cmake/cxx.cmake)
