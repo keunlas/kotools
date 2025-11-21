@@ -8,10 +8,6 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
-# C++ Compile Options (Global)
-add_compile_options(-Wall)
-add_compile_options(-Werror)
-
 # Message for debug
 message(STATUS "CMAKE_C_STANDARD = ${CMAKE_C_STANDARD}")
 message(STATUS "CMAKE_C_STANDARD_REQUIRED = ${CMAKE_C_STANDARD_REQUIRED}")
