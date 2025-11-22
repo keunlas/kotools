@@ -8,6 +8,7 @@ build/
 !.gitkeep
 !CMakeLists.txt
 !README.md
+!README*.md
 !LICENSE
 
 !/.github/**/*
