@@ -20,7 +20,9 @@ target_compile_definitions(sqlite3 PRIVATE
 
 if(MSVC)
 else()
-  target_compile_options(sqlite3 PRIVATE -Wno-stringop-overread)
+  target_compile_options(sqlite3 PRIVATE 
+    $<$<CXX_COMPILER_ID:GNU>:-Wno-stringop-overread>
+  )
 endif()
 
 if(WIN32)
