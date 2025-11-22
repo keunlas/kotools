@@ -88,7 +88,6 @@ std::string decode(const std::string_view& input) {
     if (!is_valid_char(*iter) || !is_valid_char(*(iter + 1)) ||
         !is_valid_char(*(iter + 2)) || !is_valid_char(*(iter + 3))) {
       throw std::logic_error("invalid base64 character");
-      return "";
     }
 
     auto char1 = ((get_index(*iter) & 0x3f) << 2) |
@@ -97,9 +96,9 @@ std::string decode(const std::string_view& input) {
                  ((get_index(*(iter + 2)) & 0x3c) >> 2);
     auto char3 = ((get_index(*(iter + 2)) & 0x03) << 6) |
                  (get_index(*(iter + 3)) & 0x3f);
-    result.push_back(char1);
-    result.push_back(char2);
-    result.push_back(char3);
+    result.push_back(static_cast<char>(char1));
+    result.push_back(static_cast<char>(char2));
+    result.push_back(static_cast<char>(char3));
   }
 
   if (iter == input.end()) {
@@ -122,19 +121,19 @@ std::string decode(const std::string_view& input) {
   if (remains > 1) {
     auto char1 = ((get_index(*iter) & 0x3f) << 2) |
                  ((get_index(*(iter + 1)) & 0x30) >> 4);
-    result.push_back(char1);
+    result.push_back(static_cast<char>(char1));
   }
 
   if (remains > 2) {
     auto char2 = ((get_index(*(iter + 1)) & 0x0f) << 4) |
                  ((get_index(*(iter + 2)) & 0x3c) >> 2);
-    result.push_back(char2);
+    result.push_back(static_cast<char>(char2));
   }
 
   if (remains > 3) {
     auto char3 = ((get_index(*(iter + 2)) & 0x03) << 6) |
                  (get_index(*(iter + 3)) & 0x3f);
-    result.push_back(char3);
+    result.push_back(static_cast<char>(char3));
   }
 
   return result;

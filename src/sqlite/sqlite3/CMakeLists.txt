@@ -18,9 +18,10 @@ target_compile_definitions(sqlite3 PRIVATE
   SQLITE_LIKE_DOESNT_MATCH_BLOBS
 )
 
-target_compile_options(sqlite3 PRIVATE
-  -Wno-stringop-overread
-)
+if(MSVC)
+else()
+  target_compile_options(sqlite3 PRIVATE -Wno-stringop-overread)
+endif()
 
 if(WIN32)
   target_link_libraries(sqlite3 PRIVATE ws2_32 shell32)

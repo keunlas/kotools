@@ -4,8 +4,14 @@ option(KOTOOLS_BUILD_DIVIDEDLY "Is enable CTest toolkit" ON)
 option(KOTOOLS_INCLUDE_CTEST "Is enable CTest toolkit" ON)
 
 # C++ Compile Options (Global)
-add_compile_options(-Wall)
-add_compile_options(-Werror)
+if(MSVC)
+  add_compile_options(/W4)
+  add_compile_options(/WX)
+  add_compile_options(/utf-8)
+else()
+  add_compile_options(-Wall)
+  add_compile_options(-Werror)
+endif()
 
 # Message for debug
 message(STATUS "KOTOOLS_BUILD_SHARED = ${KOTOOLS_BUILD_SHARED}")
